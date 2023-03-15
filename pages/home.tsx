@@ -39,7 +39,11 @@ export default function Page() {
           setArtistName(artist);
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        if (error.code === "ERR_BAD_REQUEST") {
+          relogin();
+        }
+
         setError(true);
       });
   };
@@ -50,7 +54,7 @@ export default function Page() {
     debouncedFetch(artist);
   };
 
-  const handleLogout = () => {
+  const relogin = () => {
     removeCookies("accessToken");
     router.push("/login");
   }
@@ -60,7 +64,7 @@ export default function Page() {
       <Header />
       <div className={styles.homeWrap}>
         <div className={styles.homeSearchWrap}>
-          <div className={styles.logout} onClick={handleLogout}>
+          <div className={styles.logout} onClick={relogin}>
             <Image
               src="/logout.svg"
               alt="logout"

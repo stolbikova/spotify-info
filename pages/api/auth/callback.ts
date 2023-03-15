@@ -38,7 +38,6 @@ export default function handler(
       }
     })
     .catch(error => {
-      debugger
       res.send(error);
     });
 }
