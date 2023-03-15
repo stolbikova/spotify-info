@@ -6,8 +6,10 @@ First, you must set up a spotify app to get a client Secret token to perform cal
 Then run the development server:
 
 ```bash
+npm install
 npm run dev
 # or
+yarn install
 yarn dev
 # or
 pnpm dev
