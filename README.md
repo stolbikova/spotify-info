@@ -2,7 +2,7 @@ This is a spotify app with nextjs under the hood
 
 ## Getting Started
 
-First, you must set up a spotify app to get a client Secret token to perform calls against their API, store CLIENT_ID and CLIENT_SECRET in env.local file
+First, you must set up a spotify app to get a client Secret token to perform calls against their API, store CLIENT_ID and CLIENT_SECRET in env.local file<br />
 Then run the development server:
 
 ```bash
