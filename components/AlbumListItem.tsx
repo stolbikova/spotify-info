@@ -2,11 +2,15 @@ import styles from "@/styles/AlbumList.module.css";
 import Image from "next/image";
 import { Item } from "../types/types";
 
-export default function AlbumItem(album: Item) {
-    const { images, name, release_date } = album;
+interface AlbumItemProps extends Item {
+    id: number;
+}
+
+export default function AlbumItem(props: AlbumItemProps) {
+    const { images, name, release_date, id} = props;
     
     return (
-      <div className={styles.albumItem}>
+      <div className={styles.albumItem} key={id}>
         {images && images[1] && images[1]?.url ? <Image
           width={203}
           height={203}

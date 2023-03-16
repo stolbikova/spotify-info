@@ -21,5 +21,14 @@ npm run dev
 yarn dev
 ```
 
+<br />
+Run the tests:
+
+```bash
+npm run test
+# or
+yarn test
+```
+
 Open [http://localhost:3000/login](http://localhost:3000/login) with your browser to see the app.
 

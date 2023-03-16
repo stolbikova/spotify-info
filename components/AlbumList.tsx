@@ -20,8 +20,8 @@ function AlbumsList({
         <span className={styles.subArtistName}>{listenersCount} monthly listeners</span>
       </div>
       <div className={styles.albumsWrap}>
-        {data.map((d) => (
-          <AlbumItem {...d} />
+        {data.map((d, idx) => (
+          <AlbumItem {...d} id={idx} />
         ))}
       </div>
     </>
