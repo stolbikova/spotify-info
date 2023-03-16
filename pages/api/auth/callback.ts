@@ -17,7 +17,7 @@ export default function handler(
     url: GET_SPOTIFY_TOKEN,
     data: querystring.stringify({
       grant_type: 'authorization_code',
-      code: code,
+      code,
       redirect_uri: REDIRECT_URI
     }),
     headers: {

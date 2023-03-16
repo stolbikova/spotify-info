@@ -1,9 +1,13 @@
 import { AxiosResponse } from "axios";
 
+export interface ImageI {
+  url: string;
+}
+
 export interface Item {
-    images: any[];
-    name: string;
-    release_date: string;
+    images?: ImageI [];
+    name?: string;
+    release_date?: string;
   }
 
   export interface GetAlbumsResponse extends AxiosResponse {

@@ -1,12 +1,12 @@
 import styles from "@/styles/Login.module.css";
-import Header from "../components/Head";
+import Head from "../components/Head";
 import SpotifyBlock from '../components/SpotifyBlock';
 import {LOGIN_URI} from '../constants';
 
 export default function Page() {
   return (
     <>
-      <Header />
+      <Head />
       <div className={styles.loginWrap}>
         <SpotifyBlock title={"Find all the albums by the artists you love to listen to."} />
         <div className={styles.button}>

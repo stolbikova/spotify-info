@@ -3,10 +3,10 @@ import styles from "@/styles/Home.module.css";
 function EmprtyBlock({ error = false }: { error: boolean }) {
     return (
       <>
-        <div>
+        <div data-testid="emptyBlock">
           <span className={styles.searchResultsTitle}>No results to show</span>
         </div>
-        {error ? <div>
+        {error ? <div data-testid="emptyBlockError">
           <span className={styles.searchResultsDescr}>
             Some error occured
           </span>

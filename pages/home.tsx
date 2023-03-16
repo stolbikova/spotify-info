@@ -1,67 +1,32 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { getCookie, removeCookies } from "cookies-next";
-import axios  from "axios";
-import { searchAlbumUrl, MARKET } from "../constants";
-import Header from "../components/Head";
+import { removeCookies } from "cookies-next";
+import Head from "../components/Head";
 import styles from "@/styles/Home.module.css";
 import SpotifyBlock from "../components/SpotifyBlock";
 import { debounce } from "../lib/debounce";
 import Image from "next/image";
-import { Item, GetAlbumsResponse } from '../types/types';
 import AlbumsList from '../components/AlbumList';
 import EmptyBlock from '../components/EmptyBlock';
-
+import useSearchApi from '../hooks/fetchData';
 
 export default function Page() {
   const router = useRouter();
-  const [data, setData] = useState<Item[]>([]);
-  const [artistName, setArtistName] = useState<string | null>(null);
-  const [error, setError] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (!getCookie("accessToken")) {
+  const relogin = () => {
+      removeCookies("accessToken");
       router.push("/login");
-    }
-  }, []);
+  }
+  const [{ data, artistName, error }, setArtistName] = useSearchApi(relogin);
 
-  const fetchData = async (artist: string) => {
-    axios
-      .get(searchAlbumUrl({ market: MARKET, artist }), {
-        headers: {
-          Authorization: `Bearer ${getCookie("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        if ((response as GetAlbumsResponse).data.albums) {
-          setData(() => (response as GetAlbumsResponse).data.albums.items);
-          setArtistName(artist);
-        }
-      })
-      .catch((error) => {
-        if (error.code === "ERR_BAD_REQUEST") {
-          relogin();
-        }
-
-        setError(true);
-      });
-  };
-  let debouncedFetch = debounce(async (a: string) => await fetchData(a));
+  let debouncedFetch = debounce(async (a: string) => await setArtistName(a));
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const artist = e.target.value;
     debouncedFetch(artist);
   };
 
-  const relogin = () => {
-    removeCookies("accessToken");
-    router.push("/login");
-  }
-
   return (
     <>
-      <Header />
+      <Head />
       <div className={styles.homeWrap}>
         <div className={styles.homeSearchWrap}>
           <div className={styles.logout} onClick={relogin}>

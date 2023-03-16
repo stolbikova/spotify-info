@@ -14,3 +14,4 @@ const DOMAIN = 'http://localhost:3000';
 const API_BASE = `${DOMAIN}/api`;
 export const REDIRECT_URI: string = `${API_BASE}/auth/callback`;
 export const LOGIN_URI = `${API_BASE}/auth/login`;
+export const REFRESH_TOKEN_URI = `${API_BASE}/auth/refresh_token`;

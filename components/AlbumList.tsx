@@ -1,44 +1,27 @@
 import styles from "@/styles/AlbumList.module.css";
-import Image from "next/image";
 import { Item } from "../types/types";
+import AlbumItem from './AlbumListItem';
 
-function AlbumItem({ album }: { album: Item }) {
-  return (
-    <div className={styles.albumItem}>
-      <Image
-        width={203}
-        height={203}
-        src={album.images[1].url}
-        alt="album img"
-        priority
-        className={styles.image}
-      ></Image>
-      <div className={styles.albumName}>{album.name}</div>
-      <div className={styles.albumDate}>
-        {new Date(album.release_date).getFullYear()}
-      </div>
-      <div></div>
-    </div>
-  );
-}
 function AlbumsList({
   data,
   artistName,
+  listenersCount = 1000
 }: {
   data: Item[];
   artistName: string;
+  listenersCount?: number
 }) {
   return (
     <>
-      <div className={styles.artistNameWrap}>
-        <span className={styles.artistName}>{artistName}</span>
+      <div className={styles.artistNameWrap} >
+        <span className={styles.artistName} data-testid="albumListArtistName">{artistName}</span>
       </div>
       <div>
-        <span className={styles.subArtistName}>1000 monthly listeners</span>
+        <span className={styles.subArtistName}>{listenersCount} monthly listeners</span>
       </div>
       <div className={styles.albumsWrap}>
         {data.map((d) => (
-          <AlbumItem album={d} />
+          <AlbumItem {...d} />
         ))}
       </div>
     </>
